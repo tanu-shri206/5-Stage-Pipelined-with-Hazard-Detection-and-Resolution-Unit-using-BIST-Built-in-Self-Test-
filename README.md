@@ -1,121 +1,105 @@
-# Design and Verification of a Performance-Enhanced Hazard Detection and Resolution Unit with BIST in a Pipelined Processor
+# Design and Verification of a 5-Stage Pipelined Processor with Hazard Detection, Forwarding and Built-In Self-Test (BIST)
 
-## Project Overview
+## 1. Project Overview
 
-This project focuses on the design and verification of a performance-enhanced Hazard Detection and Resolution Unit (HDU) integrated within a 5-stage pipelined processor architecture. The processor improves execution efficiency by reducing hazards that occur during instruction processing. 
+This project focuses on the design and verification of a **32-bit, 5-stage pipelined processor** using Verilog HDL.
 
-To further improve reliability and testability, a Built-In Self-Test (BIST) mechanism is incorporated into the design. The complete system is implemented using Verilog HDL and verified using simulation tools.
+The processor integrates a Hazard Detection Unit (HDU), a Forwarding Unit, and a Built-In Self-Test (BIST) mechanism. The objective is to improve data hazard handling, evaluate processor execution performance, and demonstrate fault detection through simulation.
 
----
+The design follows a five-stage pipeline architecture: Instruction Fetch (IF), Instruction Decode (ID), Execute (EX), Memory Access (MEM), and Write Back (WB).
 
-## Processor Architecture
+## 2. Processor Architecture
 
-The processor follows a standard 5-stage pipeline:
+The processor consists of the following five pipeline stages:
 
-1. Instruction Fetch (IF)
-2. Instruction Decode (ID)
-3. Execute (EX)
-4. Memory Access (MEM)
-5. Write Back (WB)
+| Pipeline Stage | Function |
+|---|---|
+| IF – Instruction Fetch | Fetches instructions from instruction memory |
+| ID – Instruction Decode | Decodes instructions and reads register operands |
+| EX – Execute | Performs arithmetic and logical operations |
+| MEM – Memory Access | Handles data memory operations |
+| WB – Write Back | Writes results back to the register file |
 
----
+### Key Design Components
 
-## Project Features
+- **Hazard Detection Unit (HDU):** Integrated into the Instruction Decode stage to identify relevant hazard conditions.
+- **Forwarding Unit:** Integrated into the Execute stage to forward data from pipeline registers and reduce data dependency delays.
+- **BIST Mechanism:** Incorporated to support internal testing and fault-detection evaluation.
 
-- 5-stage pipelined processor design
-- Hazard Detection Unit (HDU)
-- Forwarding Unit for data hazard handling
-- Pipeline stall mechanism
-- Control hazard handling
-- Built-In Self-Test (BIST)
-- LFSR-based test pattern generation
-- MISR-based output signature analysis
+## 3. Key Features
+
+- 32-bit processor datapath
+- Five-stage pipelined architecture
+- Hazard Detection Unit integration
+- Data forwarding mechanism
+- Built-In Self-Test (BIST) integration
 - Modular Verilog HDL implementation
-- Functional verification through testbenches
+- Simulation-based functional verification
+- Performance evaluation using execution cycles and CPI
+- Fault-injection-based BIST evaluation
 
----
+## 4. Performance Evaluation
 
-## Modules Implemented
+The processor was evaluated using a test sequence containing six instructions.
 
-### Core Processor Modules
-- 32-bit ALU
-- Register File
-- Program Counter (PC)
-- Instruction Memory
-- Data Memory
-- Control Unit
-- Pipeline Registers
+| Performance Parameter | Without HDU | With HDU and Forwarding |
+|---|---:|---:|
+| Number of Instructions | 6 | 6 |
+| Total Execution Cycles | 14 | 9 |
+| CPI | 2.33 | 1.50 |
 
-### Hazard Handling Modules
-- Hazard Detection Unit
-- Forwarding Unit
-- Stall Logic
+**Execution-cycle reduction: 35.71%**
 
-### BIST Modules
-- LFSR (Linear Feedback Shift Register)
-- MISR (Multiple Input Signature Register)
-- BIST Controller
+The simulation results demonstrate improved execution efficiency for the evaluated instruction sequence after integrating hazard detection and forwarding.
 
----
+*Note: These results correspond to the specific test sequence used in the project and should not be interpreted as a general performance improvement for every workload.*
 
-## Tools and Technologies Used
+## 5. Hazard Handling Evaluation
 
-- Verilog HDL
-- Xilinx Vivado
-- ModelSim
-- GTKWave 
-- GitHub
+Three hazard conditions were considered in the reported evaluation.
 
----
+| Configuration | Resolved Hazards | Unresolved Hazards |
+|---|---:|---:|
+| Without HDU | 0 | 3 |
+| With HDU and Forwarding | 2 | 1 |
 
-## Verification Methodology
+The results demonstrate improved hazard handling through the forwarding mechanism. Some hazard conditions remain unresolved in the implemented configuration.
 
-The design is verified using:
+## 6. Built-In Self-Test (BIST)
 
-- Directed test cases
-- Functional verification
-- Simulation waveforms
-- Hazard condition testing
-- BIST validation
+A Built-In Self-Test mechanism was integrated to evaluate the testability of the processor.
 
----
+The BIST evaluation involved fault injection and simulation-based response analysis to examine whether injected errors could be detected.
 
-## Performance Parameters
+The reported results show detection of all three injected errors in the evaluated test cases.
 
-The following parameters are considered for performance analysis:
+## 7. Tools and Technologies
 
-- Cycles Per Instruction (CPI)
-- Pipeline stall count
-- Forwarding efficiency
-- Branch prediction accuracy
-- Hazard resolution efficiency
+| Category | Tools |
+|---|---|
+| Hardware Description Language | Verilog HDL |
+| Design and Simulation | Xilinx Vivado, ModelSim |
+| Waveform Analysis | GTKWave |
+| Version Control | Git, GitHub |
 
----
+## 8. Project Outcomes
 
-## Future Scope
+- Designed and integrated a five-stage pipelined processor.
+- Integrated hazard detection and data forwarding mechanisms.
+- Evaluated processor performance using execution cycles and CPI.
+- Implemented a BIST-based testing approach.
+- Evaluated fault detection using simulation-based fault injection.
+- Compared processor behavior under different hazard-handling configurations.
 
-- FPGA implementation
-- Advanced branch prediction techniques
-- Out-of-order execution
-- Power optimization methods
-- Superscalar architecture extension
+## 9. Future Scope
 
----
+- Enhanced load-use hazard handling.
+- Implementation of pipeline stalling and flushing.
+- Improved control hazard handling.
+- FPGA-based hardware implementation.
+- Further processor performance optimization.
 
-## Project Status
+## 10. Project Status
 
-Current Progress:
+**Completed – RTL Design, Integration and Simulation-Based Verification.**
 
-✔ ALU design  
-✔ Register File design  
-✔ Program Counter design  
-✔ Instruction Memory design  
-- Pipeline implementation in progress  
-- Hazard Detection Unit integration  
-- BIST integration and verification  
-
----
-
-## Team members
-
-Tanushri Lute and Team
